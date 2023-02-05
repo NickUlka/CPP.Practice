@@ -4,7 +4,7 @@
 
 double sqrtf(double target) {
 	double x = 1;
-	double oldx;
+	double oldx=0;
 	do {
 		oldx = x;
 		x = (x + target / x) / 2;

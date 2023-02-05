@@ -14,7 +14,7 @@ int main()
     int num10 = inn % 100;
     long long div = 1000;
     long long div2 = 100;
-    int arr[9];
+    int arr[9]={0};
     for (int i = 0; i<9; i++) {
         arr[i] = inn % div%div/div2;
         div *= 10;

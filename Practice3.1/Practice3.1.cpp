@@ -1,64 +1,65 @@
 ﻿
-//Проверка номера СНИЛС
+//Проверка номера СНИЛС c использованием функций (переделанное задание 2.2)
 
-#include <string>
-//#include <vector>
 #include <iostream>
-#include <stdlib.h>
 using namespace std;
 
-bool CheckInn(string s) {
+bool CheckInn(long long inn) {
+ 
+    int num10 = inn % 100;
+    long long div = 1000;
+    long long div2 = 100;
+    int arr[9] = { 0 };
+    for (int i = 0; i < 9; i++) {
+        arr[i] = inn % div % div / div2;
+        div *= 10;
+        div2 *= 10;
+    }
+    //1. проверка ввода двух одинаковых цифр в основной части (9 цифр) номера (для проверки 11234567890)
     bool flag = true;
-    for (int i = 0; i < s.length(); i++)
-        if (s[i] != ' ' || s[i] != '-' || !isdigit(s[i]))
-        {
+    for (int i = 0; i < 8; i++) {
+        if (arr[i] == arr[i + 1])
             flag = false;
-            break;
-        }
+    }
 
-   /* char str[] = "100 ab 123 1010";
-    char* end;*/
-    string newS;
-    if (flag)
-        /*   unsigned long long num = strtoull(str, &end, 10);*/
-        for (int i = 0; i < s.length(); i++)
-            if (isdigit(s[i]))
-                newS += s[i];
-            else
-                cout << "FALSE";
+    int sum = 0;
+    if (flag) {
+        for (int i = 0; i < 9; i++)
+            //Каждая цифра СНИЛС умножается на номер своей позиции (позиция отсчитывается с конца), полученные произведения \
+             суммируются
+            sum += arr[i] * (i + 1);
+
+        //  2. Если сумма меньше 100, то контрольное число равно самой сумме (для проверки 12121212165)
+              /* 3.Если сумма равна 100 или 101, то контрольное число равно 00 (для проверки 32123231400)
+                  4.  Если сумма больше 101, то вычисляется остаток от деления суммы на 101
+                 4.1.   Если остаток меньше 100, то контрольное число равно остаток. (для проверки 12345678964)
+                 4.2   Если остаток равен 100, то контрольное число равно 00 (для проверки 19191918000)*/
+
+        if (((sum < 100 && num10 == sum) || ((sum == 100 || sum == 101) && num10 == 0)) || ((sum > 101) \
+            && ((sum % 101 < 100 && num10 == sum % 101) || (sum % 101 == 100 && num10 == 0))))
+
+            return flag;
+
+        else
+            return flag;
+
+    }
+    else
+        return flag;
+
 }
+
+
+
 
 int main()
 {
 
-    string inn;
+    long long inn;
     cout << "Input INN: ";
-    getline(cin, inn);
+    cin >> inn;
+    cout << "The INN is " << boolalpha << CheckInn(inn) << endl;
 
 
-
-   /* string s;
-    getline(cin, s);
-
-    if (s[s.length() - 1] != '.')
-        s += '.';*/
-
-    //string tmp;
-    //vector <string> vs;
-    //for (int i = 0; i < s.length(); i++)
-    //{
-    //    if (s[i] == ' ' || s[i] == '.')
-    //    {
-    //        vs.push_back(tmp);
-    //        tmp.clear();
-    //    }
-    //    else
-    //        tmp += s[i];
-    //}
-
-    //int n = stoi(vs[0]);
-    //int m = stoi(vs[1]);
-    //int k = stoi(vs[2]);
-
-    //cout << n << " " << m << " " << k << endl;
 }
+   

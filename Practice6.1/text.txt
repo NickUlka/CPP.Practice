@@ -1,0 +1,7 @@
+    cout << "Enter text for the file: "<<endl;
+    string fileName = "text.txt";
+    ofstream fout(fileName);
+
+    const int MAX = 200;
+    char str[MAX];   
+    cin.get(str, MAX, '

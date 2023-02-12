@@ -9,7 +9,7 @@ int Myroot(double, double, double, double&, double&);
 
 int main()
 {
-    double x1 = 0, x2 = 0;
+    double x1,x2;
     //double a = 1, b = 2, c = 3; // нет корней
     double a = 2, b = 4, c = 2; // одинаковые корни
    // double a = 1, b = 4, c = 3; // 2 корня

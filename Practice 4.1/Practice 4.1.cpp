@@ -17,7 +17,7 @@ int main()
     switch (result)
     {
     case 1:
-        std::cout << "«The roots of the equation are: x1 = " << x1 << ", x2 = " << x2 << std::endl;
+        std::cout << "The roots of the equation are: x1 = " << x1 << ", x2 = " << x2 << std::endl;
         break;
     case 0:
         std::cout << "The roots of the equation are equal: x1 = x2 = " << x1 << std::endl;

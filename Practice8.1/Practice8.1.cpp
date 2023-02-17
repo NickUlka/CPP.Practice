@@ -26,27 +26,31 @@ public:
             minutes = minutes % 60;
         }
     }
-
-    void showTime()	const
+   
+    friend void showTime(Time&); 
+   
+    Time plusTime(const Time& t) const
     {
-        cout << hours << ":" << minutes << ":" << seconds << endl;
-    }
-    void plusTime(const Time& t1,const Time& t2) {
-        this->hours = t1.hours + t2.hours;
-        this->minutes = t1.minutes + t2.minutes;
-        this->seconds = t1.seconds + t2.seconds;
-        if (seconds / 60 > 0) {
-            minutes += seconds / 60;
-            seconds = seconds % 60;
+        Time time;
+        time.hours = hours + t.hours;
+        time.minutes = minutes + t.minutes;
+        time.seconds = seconds + t.seconds;
+        if (time.seconds / 60 > 0) {
+            time.minutes += time.seconds / 60;
+            time.seconds = time.seconds % 60;
         }
-        if (minutes / 60 > 0) {
-            hours += minutes / 60;
-            minutes = minutes % 60;
+        if (time.minutes / 60 > 0) {
+            time.hours += time.minutes / 60;
+            time.minutes = time.minutes % 60;
         }
+        return time;
     }
 };
 
-
+void showTime(Time& time)
+{
+    cout << time.hours << ":" << time.minutes << ":" << time.seconds << endl;
+}
 
 int main()
 {
@@ -57,7 +61,6 @@ int main()
     cout << "Input another time in hours, minutes and seconds:\n";
     cin >> h >> m >> s;
     Time time2(h, m, s);
-    Time time3;
-    time3.plusTime(time1, time2);
-    time3.showTime();
+    Time time3 = time1.plusTime(time2);
+    showTime(time3);
 }

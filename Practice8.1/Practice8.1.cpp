@@ -31,7 +31,7 @@ public:
     {
         CheckTime(h, m, s);
     }
-   
+
     friend void showTime(Time&); 
    
     Time plusTime(const Time& t) const{
